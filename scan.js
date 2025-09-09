@@ -23,8 +23,7 @@ const VULNERABLE_PACKAGES = {
   'ansi-styles': ['6.2.2'],
   'supports-color': ['10.2.1'],
   'proto-tinker-wc': ['1.8.7'],
-  'debug': ['4.4.2'],
-  'crypto-js': ['4.2.0']
+  'debug': ['4.4.2']
 };
 
 class NpmVulnerabilityScanner {
