@@ -23,7 +23,8 @@ const VULNERABLE_PACKAGES = {
   'ansi-styles': ['6.2.2'],
   'supports-color': ['10.2.1'],
   'proto-tinker-wc': ['1.8.7'],
-  'debug': ['4.4.2']
+  'debug': ['4.4.2'],
+  'crypto-js': ['4.2.0']
 };
 
 class NpmVulnerabilityScanner {
@@ -41,6 +42,12 @@ class NpmVulnerabilityScanner {
    */
   findNpmProjects(dir = this.rootDirectory) {
     const projects = [];
+
+    // check if the current directory is an npm project
+    const packageJsonPath = path.join(dir, 'package.json');
+    if (fs.existsSync(packageJsonPath)) {
+      projects.push(dir);
+    }
     
     try {
       const items = fs.readdirSync(dir);
