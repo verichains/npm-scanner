@@ -47,6 +47,7 @@ class NpmVulnerabilityScanner {
     const packageJsonPath = path.join(dir, 'package.json');
     if (fs.existsSync(packageJsonPath)) {
       projects.push(dir);
+      console.log("Found npm project:", dir);
     }
     
     try {
