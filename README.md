@@ -1,9 +1,8 @@
 # Verichains NPM Vulnerability Scanner
 
-A **Node.js-based recursive scanner** for detecting vulnerable or malicious NPM package versions across multiple projects in a directory tree.  
-Developed in response to the recent [NPM supply chain attack](https://jdstaerk.substack.com/p/we-just-found-malicious-code-in-the), which compromised several widely used packages such as `chalk`, `debug`, `strip-ansi`, and more.
+A **Node.js-based recursive scanner** for detecting vulnerable or malicious NPM package versions across multiple projects in a directory tree.
 
-This tool was built by Verichains to help developers and organizations quickly scan their projects for affected NPM packages.
+This tool was built by Verichains in response to the recent [NPM supply chain attack](https://jdstaerk.substack.com/p/we-just-found-malicious-code-in-the), which compromised widely used packages such as `chalk`, `debug`, `strip-ansi`, to help developers and organizations quickly scan their projects for affected NPM packages.
 
 ---
 
@@ -11,7 +10,9 @@ This tool was built by Verichains to help developers and organizations quickly s
 
 A supply chain attack compromised the NPM account of maintainer `qix`, resulting in the publication of malicious versions of several widely used packages.
 
-Together, the affected libraries account for over one billion weekly downloads, highlighting the unprecedented scale of the threat to the JavaScript ecosystem. 
+The injected payload functioned as a crypto-clipper, designed to steal funds by replacing wallet addresses in network requests and hijacking cryptocurrency transactions.
+
+Given their integration into thousands of CLI tools, frameworks, and backend services, the compromise is regarded as one of the most concerning supply chain incidents in the NPM ecosystem, with the affected libraries collectively receiving over two billion weekly downloads.
 
 Notable weekly download counts:
 
@@ -25,9 +26,6 @@ Notable weekly download counts:
 * color-convert (193M)
 * color-name (191M)
 
-The injected payload functioned as a crypto-clipper, designed to steal funds by replacing wallet addresses in network requests and hijacking cryptocurrency transactions.
-
-Given their integration into thousands of CLI tools, frameworks, and backend services, the compromise introduced a significant security risk and is considered one of the most severe supply chain incidents in the NPM ecosystem.
 
 **Affected packages include (not exhaustive):**
 
@@ -59,7 +57,7 @@ The following packages and versions have been identified as compromised:
 - [(RESOLVED) Version 4.4.2 published to npm is compromised](https://github.com/debug-js/debug/issues/1005#issuecomment-3266868187)
 
 
-## 🔍 Features
+## 🔍 Tool Features
 
 - Recursively scans all subdirectories for NPM projects
 - Identifies **known compromised package versions** from the incident.
@@ -119,3 +117,5 @@ VULNERABLE PROJECTS:
    ⚠️  etag@1.8.1 (via: express > serve-static > send > etag)
    ⚠️  portfinder@1.0.32 (via: http-server > portfinder)
 ```
+
+*Note: This is sample output with example packages only and does not represent real malicious packages.* 
