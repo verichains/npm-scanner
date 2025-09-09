@@ -23,7 +23,12 @@ const VULNERABLE_PACKAGES = {
   'ansi-styles': ['6.2.2'],
   'supports-color': ['10.2.1'],
   'proto-tinker-wc': ['1.8.7'],
-  'debug': ['4.4.2']
+  'debug': ['4.4.2'],
+  // for testing only
+  // 'supports-color': ['8.1.1'],
+  // 'get-intrinsic': ['1.2.4'],
+  // 'etag': ['1.8.1'],
+  // 'portfinder': ['1.0.32']
 };
 
 class NpmVulnerabilityScanner {
@@ -60,13 +65,6 @@ class NpmVulnerabilityScanner {
           // Skip node_modules directories to avoid false positives
           if (item === 'node_modules') {
             continue;
-          }
-          
-          // Check if this directory contains package.json
-          const packageJsonPath = path.join(fullPath, 'package.json');
-          if (fs.existsSync(packageJsonPath)) {
-            projects.push(fullPath);
-            console.log("Found npm project:", fullPath);
           }
           
           // Recursively search subdirectories
