@@ -75,14 +75,20 @@ Clone this repository:
 $ git clone https://github.com/verichains/npm-scanner.git
 $ cd npm-scanner
 $ node scan.js ./my-projects
+```
 
-Starting vulnerability scan in: ./my-projects
-Looking for vulnerable packages: backslash@0.2.1, chalk@5.6.1, chalk-template@1.1.1, color-convert@3.1.1, color-name@2.0.1, color-string@2.1.1, wrap-ansi@9.0.1, supports-hyperlinks@4.1.1, strip-ansi@7.1.1, slice-ansi@7.1.1, simple-swizzle@0.2.3, is-arrayish@0.3.3, error-ex@1.3.3, has-ansi@6.0.1, ansi-regex@6.2.1, ansi-styles@6.2.2, supports-color@10.2.1, proto-tinker-wc@1.8.7, debug@4.4.2
+## Example output
 
-Found npm project: ./my-projects
+```bash
+$ node scan.js ../my-projects
+
+Starting vulnerability scan in: /home/user/test/my-projects
+Looking for vulnerable packages: backslash@0.2.1, chalk@5.6.1, chalk-template@1.1.1, color-convert@3.1.1, color-name@2.0.1, color-string@2.1.1, wrap-ansi@9.0.1, supports-hyperlinks@4.1.1, strip-ansi@7.1.1, slice-ansi@7.1.1, simple-swizzle@0.2.3, is-arrayish@0.3.3, error-ex@1.3.3, has-ansi@6.0.1, ansi-regex@6.2.1, ansi-styles@6.2.2, supports-color@8.1.1, proto-tinker-wc@1.8.7, debug@4.4.2, get-intrinsic@1.2.4, etag@1.8.1, portfinder@1.0.32
+
+Found npm project: /home/user/test/my-projects
 Found 1 npm projects
 
-Scanning: ./my-projects
+Scanning: /home/user/test/my-projects
 
 ============================================================
 VULNERABILITY SCAN RESULTS
@@ -96,6 +102,20 @@ Errors: 0
 VULNERABLE PROJECTS:
 ----------------------------------------
 
-1. my-projects (./my-projects)
-   ⚠️  debug@4.4.2 (direct dependency)
+1. my-projects (/home/user/test/my-projects)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > has-property-descriptors > es-define-property > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > has-property-descriptors > es-define-property > gopd > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > es-define-property > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > set-function-length > define-data-property > es-define-property > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > set-function-length > define-data-property > gopd > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > set-function-length > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > call-bind > set-function-length > gopd > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > get-intrinsic)
+   ⚠️  get-intrinsic@1.2.4 (via: body-parser > qs > side-channel > get-intrinsic > call-bind > get-intrinsic)
+   ⚠️  supports-color@8.1.1 (via: concurrently > supports-color)
+   ⚠️  etag@1.8.1 (via: express > etag)
+   ⚠️  etag@1.8.1 (via: express > send > etag)
+   ⚠️  etag@1.8.1 (via: express > serve-static > send > etag)
+   ⚠️  portfinder@1.0.32 (via: http-server > portfinder)
 ```
