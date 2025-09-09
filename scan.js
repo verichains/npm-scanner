@@ -4,10 +4,26 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// Configuration: Add vulnerable package versions to check for
 const VULNERABLE_PACKAGES = {
-  'debug': ['4.4.2'],
-  'chalk': ['5.6.1']
+  'backslash': ['0.2.1'],
+  'chalk': ['5.6.1'],
+  'chalk-template': ['1.1.1'],
+  'color-convert': ['3.1.1'],
+  'color-name': ['2.0.1'],
+  'color-string': ['2.1.1'],
+  'wrap-ansi': ['9.0.1'],
+  'supports-hyperlinks': ['4.1.1'],
+  'strip-ansi': ['7.1.1'],
+  'slice-ansi': ['7.1.1'],
+  'simple-swizzle': ['0.2.3'],
+  'is-arrayish': ['0.3.3'],
+  'error-ex': ['1.3.3'],
+  'has-ansi': ['6.0.1'],
+  'ansi-regex': ['6.2.1'],
+  'ansi-styles': ['6.2.2'],
+  'supports-color': ['10.2.1'],
+  'proto-tinker-wc': ['1.8.7'],
+  'debug': ['4.4.2']
 };
 
 class NpmVulnerabilityScanner {
