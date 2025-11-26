@@ -95,7 +95,7 @@ class NpmVulnerabilityScanner {
     
     // Remove any version prefixes (^, ~, etc.) for exact comparison
     const cleanVersion = version.replace(/^[\^~>=<]+/, '');
-    return VULNERABLE_PACKAGES[packageName] === "all" || VULNERABLE_PACKAGES[packageName].includes(cleanVersion);
+    return VULNERABLE_PACKAGES[packageName] === "*" || VULNERABLE_PACKAGES[packageName].includes(cleanVersion);
   }
 
   /**
@@ -176,7 +176,7 @@ class NpmVulnerabilityScanner {
    */
   async scan() {
     console.log(`Starting vulnerability scan in: ${this.rootDirectory}`);
-    console.log(`Looking for vulnerable packages: ${Object.entries(VULNERABLE_PACKAGES).map(([key, value]) => value === "all" ? key : `${key}@${value.join(', ')}`).join(', ')}`);
+    console.log(`Looking for vulnerable packages: ${Object.entries(VULNERABLE_PACKAGES).map(([key, value]) => value === "*" ? key : `${key}@${value.join(', ')}`).join(', ')}`);
     console.log('');
     
     const projects = this.findNpmProjects();
