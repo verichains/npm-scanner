@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const semver = require('semver');
 
 const VULNERABLE_PACKAGES = JSON.parse(fs.readFileSync('vulnerable_packages.json', 'utf8'));
 
@@ -95,7 +96,8 @@ class NpmVulnerabilityScanner {
     
     // Remove any version prefixes (^, ~, etc.) for exact comparison
     const cleanVersion = version.replace(/^[\^~>=<]+/, '');
-    return VULNERABLE_PACKAGES[packageName] === "*" || VULNERABLE_PACKAGES[packageName].includes(cleanVersion);
+    console.log(`Checking ${packageName}@${cleanVersion} against ${VULNERABLE_PACKAGES[packageName]}`);
+    return VULNERABLE_PACKAGES[packageName] === "*" || VULNERABLE_PACKAGES[packageName].some(vulnerableRange => semver.satisfies(cleanVersion, vulnerableRange));
   }
 
   /**
@@ -109,6 +111,8 @@ class NpmVulnerabilityScanner {
     }
     
     for (const [packageName, packageInfo] of Object.entries(dependencies)) {
+      // console.log("packageName", packageName);
+      // console.log("packageInfo", packageInfo);
       if (packageInfo && packageInfo.version) {
         const currentPath = [...dependencyPath, packageName];
         
@@ -176,7 +180,7 @@ class NpmVulnerabilityScanner {
    */
   async scan() {
     console.log(`Starting vulnerability scan in: ${this.rootDirectory}`);
-    console.log(`Looking for vulnerable packages: ${Object.entries(VULNERABLE_PACKAGES).map(([key, value]) => value === "*" ? key : `${key}@${value.join(', ')}`).join(', ')}`);
+    console.log(`Looking for vulnerable packages`);
     console.log('');
     
     const projects = this.findNpmProjects();

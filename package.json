@@ -1,0 +1,11 @@
+{
+  "name": "npm-scan",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:vrc-dev/npm-scanner.git",
+  "author": "nt <ngoctint1lvc@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "semver": "^7.7.3"
+  }
+}

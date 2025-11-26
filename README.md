@@ -69,7 +69,15 @@ The following packages and versions have been identified as compromised:
 - Identifies **known compromised package versions** from the incident.
 - Outputs a clear report of affected packages and their paths.
 - Fast and lightweight, no external dependencies beyond Node.js standard modules.
+- Support semver and wildcard syntax for vulnerable package versions. Example:
 
+```json
+{
+  "aes-js": [">=4.0.0-beta.1"],
+  "@adraffy/ens-normalize": ["^1.10.0"],
+  "wallet-evm": "*", // match all versions
+}
+```
 
 ## 📦 Usage
 
@@ -78,6 +86,7 @@ Clone this repository:
 ```bash
 $ git clone https://github.com/verichains/npm-scanner.git
 $ cd npm-scanner
+$ yarn install
 $ node scan.js ./my-projects
 ```
 
@@ -87,7 +96,7 @@ $ node scan.js ./my-projects
 $ node scan.js ../my-projects
 
 Starting vulnerability scan in: /home/user/test/my-projects
-Looking for vulnerable packages: backslash@0.2.1, chalk@5.6.1, chalk-template@1.1.1, color-convert@3.1.1, color-name@2.0.1, color-string@2.1.1, wrap-ansi@9.0.1, supports-hyperlinks@4.1.1, strip-ansi@7.1.1, slice-ansi@7.1.1, simple-swizzle@0.2.3, is-arrayish@0.3.3, error-ex@1.3.3, has-ansi@6.0.1, ansi-regex@6.2.1, ansi-styles@6.2.2, supports-color@8.1.1, proto-tinker-wc@1.8.7, debug@4.4.2, get-intrinsic@1.2.4, etag@1.8.1, portfinder@1.0.32
+Looking for vulnerable packages
 
 Found npm project: /home/user/test/my-projects
 Found 1 npm projects
