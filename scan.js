@@ -4,34 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const VULNERABLE_PACKAGES = {
-  'backslash': ['0.2.1'],
-  'ansi-styles': ['6.2.2'],
-  'debug': ['4.4.2'],
-  'chalk': ['5.6.1'],
-  'strip-ansi': ['7.1.1'],
-  'supports-color': ['10.2.1'],
-  'ansi-regex': ['6.2.1'],
-  'wrap-ansi': ['9.0.1'],
-  'slice-ansi': ['7.1.1'],
-  'is-arrayish': ['0.3.3'],
-  'color-convert': ['3.1.1'],
-  'color-name': ['2.0.1'],
-  'color-string': ['2.1.1'],
-  'simple-swizzle': ['0.2.3'],
-  'error-ex': ['1.3.3'],
-  'has-ansi': ['6.0.1'],
-  'supports-hyperlinks': ['4.1.1'],
-  'chalk-template': ['1.1.1'],
-  'backslash': ['0.2.1'],
-  'color': ['5.0.1'],
-  '@duckdb/node-api': ['1.3.3'],
-  '@duckdb/node-bindings': ['1.3.3'],
-  'duckdb': ['1.3.3'],
-  '@duckdb/duckdb-wasm': ['1.29.2'],
-  'prebid.js': ['10.9.2'],
-  'proto-tinker-wc': ['0.1.87']
-};
+const VULNERABLE_PACKAGES = JSON.parse(fs.readFileSync('vulnerable_packages.json', 'utf8'));
 
 class NpmVulnerabilityScanner {
   constructor(rootDirectory) {
@@ -122,7 +95,7 @@ class NpmVulnerabilityScanner {
     
     // Remove any version prefixes (^, ~, etc.) for exact comparison
     const cleanVersion = version.replace(/^[\^~>=<]+/, '');
-    return VULNERABLE_PACKAGES[packageName].includes(cleanVersion);
+    return VULNERABLE_PACKAGES[packageName] === "all" || VULNERABLE_PACKAGES[packageName].includes(cleanVersion);
   }
 
   /**
@@ -203,7 +176,7 @@ class NpmVulnerabilityScanner {
    */
   async scan() {
     console.log(`Starting vulnerability scan in: ${this.rootDirectory}`);
-    console.log(`Looking for vulnerable packages: ${Object.entries(VULNERABLE_PACKAGES).map(([key, value]) => `${key}@${value.join(', ')}`).join(', ')}`);
+    console.log(`Looking for vulnerable packages: ${Object.entries(VULNERABLE_PACKAGES).map(([key, value]) => value === "all" ? key : `${key}@${value.join(', ')}`).join(', ')}`);
     console.log('');
     
     const projects = this.findNpmProjects();
@@ -268,8 +241,8 @@ async function main() {
   const args = process.argv.slice(2);
   
   if (args.length === 0) {
-    console.log('Usage: node npm-vulnerability-scanner.js <root-directory>');
-    console.log('Example: node npm-vulnerability-scanner.js ./my-projects');
+    console.log('Usage: node scan.js <root-directory>');
+    console.log('Example: node scan.js ./my-projects');
     process.exit(1);
   }
   
