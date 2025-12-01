@@ -84,7 +84,7 @@ The following packages and versions have been identified as compromised:
 Clone this repository:
 
 ```bash
-$ git clone https://github.com/verichains/npm-scanner.git
+$ git clone https://github.com/Gear4music/npm-scanner.git
 $ cd npm-scanner
 $ yarn install
 $ node scan.js ./my-projects
