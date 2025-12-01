@@ -95,14 +95,19 @@ class NpmVulnerabilityScanner {
    * Check if a package version matches any vulnerable versions
    */
   isVulnerableVersion(packageName, version) {
-    if (!VULNERABLE_PACKAGES[packageName]) {
-      return false;
-    }
-    
-    // Remove any version prefixes (^, ~, etc.) for exact comparison
+    const rule = VULNERABLE_PACKAGES[packageName];
+    if (!rule) return false;
+
+    // wildcard "*" means all versions are vulnerable
+    if (rule === "*") return true;
+
+    // convert single string → array
+    const ranges = Array.isArray(rule) ? rule : [rule];
+
     const cleanVersion = version.replace(/^[\^~>=<]+/, '');
-    console.log(`Checking ${packageName}@${cleanVersion} against ${VULNERABLE_PACKAGES[packageName]}`);
-    return VULNERABLE_PACKAGES[packageName] === "*" || VULNERABLE_PACKAGES[packageName].some(vulnerableRange => semver.satisfies(cleanVersion, vulnerableRange));
+    console.log(`Checking ${packageName}@${cleanVersion} against`, ranges);
+
+    return ranges.some(range => semver.satisfies(cleanVersion, range));
   }
 
   /**
