@@ -48,6 +48,11 @@ class NpmVulnerabilityScanner {
         }
       }
     } catch (error) {
+      if (error.code === 'ENOENT') {
+        console.debug(`Debug: Skipping directory because it doesn't exist: ${dir}`);
+        return projects;
+      }
+
       this.results.errors.push({
         type: 'directory_scan',
         path: dir,
