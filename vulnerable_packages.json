@@ -946,5 +946,7 @@
   "victoria-wallet-utils": "*",
   "victoria-wallet-validator": "*",
   "vue-browserupdate-nuxt": "*",
-  "wallet-evm": "*"
+  "wallet-evm": "*",
+  "axios": "1.14.1",
+  "plain-crypto-js": "*"
 }
